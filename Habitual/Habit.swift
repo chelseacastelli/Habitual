@@ -8,9 +8,9 @@
 
 import UIKit
 
-struct Habit {
+struct Habit: Codable {
     
-    enum Images: Int, CaseIterable {
+    enum Images: Int, Codable, CaseIterable {
         case book
         case bulb
         case clock
