@@ -10,30 +10,35 @@ import UIKit
 
 class HabitsTableViewController: UITableViewController {
     
-    var names: [String] = ["Alan", "Braus", "Adriana", "Mitchell", "Dani", "Jess", "Dan", "Meredith", "Dan", "Milad"]
+    var habits: [Habit] = [
+        Habit(title: "Go to bed before 10pm", image: Habit.Images.book),
+        Habit(title: "Drink 8 Glasses of Water", image: Habit.Images.book),
+        Habit(title: "Commit Today", image: Habit.Images.book),
+        Habit(title: "Stand up every Hour", image: Habit.Images.book)
+    ]
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavBar()
+        
+        tableView.register(
+                    HabitTableViewCell.nib,
+                    forCellReuseIdentifier: HabitTableViewCell.identifier
+        )
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return names.count
+
+      return habits.count
+
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell: UITableViewCell
-        if let dequeueCell = tableView.dequeueReusableCell(withIdentifier: "cell") {
-            cell = dequeueCell
-        } else {
-            cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
-        }
-
-        let name = names[indexPath.row]
-        cell.textLabel?.text = name
-
-        return cell
+      let cell = tableView.dequeueReusableCell( withIdentifier: HabitTableViewCell.identifier, for: indexPath) as! HabitTableViewCell
+      let habit = habits[indexPath.row]
+      cell.configure(habit)
+      return cell
     }
 
 }
@@ -47,8 +52,8 @@ extension HabitsTableViewController {
     }
 
     @objc func pressAddHabit(_ sender: UIBarButtonItem) {
-        names.insert("Hello, World!", at: 0)
-        let topIndexPath = IndexPath(row: 0, section: 0)
-        tableView.insertRows(at: [topIndexPath], with: .automatic)
+//        habits.insert("Hello, World!", at: 0)
+//        let topIndexPath = IndexPath(row: 0, section: 0)
+//        tableView.insertRows(at: [topIndexPath], with: .automatic)
     }
 }
