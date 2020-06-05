@@ -75,6 +75,17 @@ class HabitsTableViewController: UITableViewController {
           break
         }
     }
+    
+    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+      persistence.swapHabits(habitIndex: sourceIndexPath.row, destinationIndex: destinationIndexPath.row)
+    }
+    
+    func swapHabits(habitIndex: Int, destinationIndex: Int) {
+        let habitToSwap = self.habits[habitIndex]
+        self.habits.remove(at: habitIndex)
+        self.habits.insert(habitToSwap, at: destinationIndex)
+        self.persistence.saveHabits()
+    }
 
 }
 

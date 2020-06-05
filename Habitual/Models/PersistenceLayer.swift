@@ -42,7 +42,7 @@ struct PersistenceLayer {
         return newHabit
     }
     
-    private func saveHabits() {
+    func saveHabits() {
         
         guard let habitsData = try? JSONEncoder().encode(self.habits) else {
             fatalError("could not encode list of habits")
