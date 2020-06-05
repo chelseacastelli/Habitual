@@ -25,6 +25,7 @@ class ConfirmHabitViewController: UIViewController {
     private func updateUI() {
         title = "New Habit"
         habitImageView.image = habitImage.image
+    
     }
 
     @IBAction func createHabitButtonPressed(_ sender: Any) {
@@ -34,5 +35,10 @@ class ConfirmHabitViewController: UIViewController {
         self.presentingViewController?.dismiss(animated: true, completion: nil)
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+        super.touchesBegan(touches, with: event)
+    }
     
 }
+
